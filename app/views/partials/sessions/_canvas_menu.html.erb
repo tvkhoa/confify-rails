@@ -1,0 +1,49 @@
+<nav class="tab-bar">
+  <% if user_signed_in? %>
+  <section class="left-small">
+    <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+  </section>
+  <% end %>
+
+  <section class="middle tab-bar-section">   
+    <h1 class="left title">Choose</h1>
+    <ul class="right button-group radius show-for-medium-up">
+      <% unless user_signed_in? %>
+      <li>
+        <a href="<%= new_user_registration_path %>" class="tiny button alert">Sign up</a>
+      </li>
+      <li>
+        <a href="<%= new_user_session_path %>" class="tiny button secondary">Sign in</a>
+      </li>
+      <% else %>
+      <li>
+          <a class="round" href="#">
+            <img src="<%= current_user.avatar || current_user.image_url %>" />
+            <%= current_user.name %>
+          </a>
+      </li>  
+            <li>
+              <a data-method="delete" href="/users/sign_out" rel="nofollow">
+                <span class="label label-important">Log out</span>
+              </a>
+            </li>
+          
+           <% end %>
+    </ul>
+  </section>
+  <!-- Right Nav Section -->
+</nav>
+
+<aside class="left-off-canvas-menu">
+  <ul class="off-canvas-list">
+    <li><label>My Account</label></li>
+    <li><a href="#">View and edit</a></li>
+    <li><label>My confession</label></li>
+    <li><a href="#">Confession 1</a></li>
+    <li><a href="#">Confession 2</a></li>
+    <li><a href="#">Add new...</a></li>
+    <li><label>My bookmark</label></li>
+    <li><a href="#">Confession 1</a></li>
+    <li><a href="#">Confession 2</a></li>
+  </ul>
+</aside>

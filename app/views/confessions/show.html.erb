@@ -1,0 +1,46 @@
+<div class="row collapse">
+  <div class="large-12 columns">
+
+    <%= render "partials/sessions/alert_bar" %>
+    
+    <!-- Header -->
+    <header class="clearfix radius-5 header antialiased">
+      <div class="row collapse">
+        <div class="large-12 columns">
+          
+          <%= render "partials/sessions/dashboard" %>
+          <%= render 'post_create_form' %>
+         
+        </div>
+      </div>
+    </header>
+     
+    <!-- BUTTON GROUP -->
+    <div class="content-wrap">
+      <div class="row collapse">
+        <div class="large-12 columns">
+
+          <%= render "filter_control" %>
+
+          <!-- Timeline posts -->
+          <section class="main">
+            <ul class="timeline m-0">
+              <% @approved_posts.each do |post| %>
+                <% @post_decorator.setPost(post) %>
+                <%= render "post_timeline_item", :post => post %>
+              <% end %>
+
+              
+            </ul>
+            <div class="text-center">
+              <a class="button secondary radius round uppercase" href="<%= get_confess_path( { :path_name => @confession.path_name }, @view_more_param) %>"> View more ... </a>
+            </div>
+
+          </section>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

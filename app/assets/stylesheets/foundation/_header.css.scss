@@ -1,0 +1,52 @@
+
+.header{
+  margin-top: 20px;
+  background-color: #{$header-bg-color};
+  border: 10px solid #{$header-border-color};
+}
+
+.dashboard-name{
+  font-size: rem-calc(27);
+  vertical-align: middle;
+}
+
+.dashboard-info{
+  	 min-height: 115px;
+	   line-height: 150%;
+	   padding-top: 16px;
+}
+.dashboard-social{
+	padding-top: 10px;
+}
+
+.compose-div:before{
+  content: "\f178";
+  font-family: FontAwesome;
+  font-size: 44px;
+  color: #B1D8FC;
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  left: -33px;
+}
+.edit_confession{
+  position: relative;
+  margin-top:10px;
+}
+.post-area{
+  height: rem-calc(145);
+  font-size: rem-calc(16);
+  line-height: 150%;
+  border: 1px solid #{$post-form-border-color};
+  padding: rem-calc(20 20 20 20);
+  @include side-radius(top,3px);
+}
+
+.ask-panel{
+  position: relative;
+  top: -10px;
+  border: 1px solid #{$post-form-border-color};
+  padding: rem-calc(15);
+  background-color: #{$post-form-bg-color};
+  @include side-radius(bottom,3px);
+}

@@ -1,0 +1,13 @@
+<% if flash[:error].present? %>
+  <div data-alert class="alert-box warning ">
+    <%= flash[:error] %>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>
+
+<% if flash[:success].present? %>
+  <div data-alert class="alert-box success ">
+    <%= flash[:success] %>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>

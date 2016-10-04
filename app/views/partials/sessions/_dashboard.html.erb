@@ -1,0 +1,22 @@
+<div class="large-6 columns">
+  <div class="clearfix row ">
+      <div class="dashboard-info">
+        <h3><%= @confession.title %></h3>
+        <h5><%= @confession.text %></h5>
+      </div>
+    
+
+      
+      <div class="relative">
+        <hr/>
+        <div class="dashboard-social">
+          <div class="fb-like" data-href="<%= get_confess_url(@confession.path_name) %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+          <div class="custom-tweet-button">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= get_confess_url(@confession.path_name) %>" data-via="your_screen_name" data-lang="en">Tweet</a>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>

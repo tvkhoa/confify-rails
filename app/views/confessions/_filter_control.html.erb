@@ -1,0 +1,29 @@
+
+    <dl class="sub-nav" data-topbar data-options="sticky_on: medium;">
+      <div class="filter-wrap">
+        <div class="row">
+          <div class="large-6 columns filter-dropdown">
+            <span>Filter:</span>
+            <span>
+              <a href="#" data-dropdown="drop-filter" data-options="is_hover:true" class="m-0 small secondary radius round button dropdown">Choose filter</a><br>
+              <ul id="drop-filter" data-dropdown-content class="f-dropdown">
+                <li>
+                  <%= link_to "Newest", get_confess_path(:path_name => @confession.path_name, :by_newest => true) %>
+                </li>
+                <li>
+                  <%= link_to "Hottest", get_confess_path(:path_name => @confession.path_name, :by_hottest => true) %>
+                </li>
+              </ul>
+            </span>
+          </div>
+          <div class="large-6 columns filter-search">
+                <%= form_tag(@confession.path_name, method: "get") do %>
+                  <div class="search-wrap radius-20 right">
+                    <a class="fa fa-search button-submit" id="search-button" name="commit" type="submit" ></a>
+                    <%= text_field_tag(:by_index, nil, placeholder: "Index", class: "search-input remove-select") %>
+                  </div>
+                <% end %>
+          </div>
+        </div>   
+      </div>
+    </dl>

@@ -1,0 +1,26 @@
+body{
+  background-image: image-url('bg.png');
+  background-repeat: repeat;
+}
+
+.edit_locale_form{
+  display: none;
+}
+
+.feedback-text{
+	padding: 10px 0 0 0;
+}
+.feedback-btn{
+	margin: 10px 0;
+}
+
+.feedback-form{
+	
+}
+
+.admin-action-button{
+	color: #212121;
+}
+.admin-action-button:hover, .admin-action-button:hover span, .admin-action-button.active, .admin-action-button.active span{
+	color: #58c3e8;
+}

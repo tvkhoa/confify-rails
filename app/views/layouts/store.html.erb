@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Confify" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "modernizr", "modernizr.custom" %>
+
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div id="ip-container" class="ip-container">
+      <%= render "partials/sessions/init_header" %>
+      
+      <!-- main content -->
+      <div class="ip-main">
+        
+        <%= render "partials/sessions/new_top_bar" %>
+        
+        <%= yield %>
+
+         <%= render "partials/sessions/footer" %>
+
+      </div>
+    </div>
+    
+    <%= javascript_include_tag "application", "classie", "pathLoader", "main" %>
+
+    <script type="text/javascript">
+
+        $(window).load(function() {
+          $('.flexslider').flexslider();
+        });
+
+
+    </script>
+  </body>
+
+</html>

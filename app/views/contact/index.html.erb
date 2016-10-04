@@ -1,0 +1,36 @@
+ <div class="row white-bg contact-board radius-5">
+
+  <div class="large-5 columns" style="padding: 30px 10px 20px 10px;">
+      <a href="">
+        <img class="contact-img " src="<%= asset_path('demo_pic.jpg') %>">
+      </a>
+  </div>
+
+
+  <div class="large-7 columns text-center">
+
+    <h3 class="uppercase" style="padding-top: 20px;">Get in Touch</h3>
+    <p style="padding-bottom: 20px;" >We'd love to hear from you. We love getting email <em>all day</em>.</p>
+
+    
+    <form>
+      <div class="row"> 
+        <div class="large-6 columns">
+          <%= text_field_tag :name, nil, :class => "contact-input full-width fs20 lh150", :placeholder => "Name" , :value => "" %>
+        </div>
+        <div class="large-6 columns">
+           <%= text_field_tag :email, nil, :class => "contact-input full-width fs20 lh150", :placeholder => "Email" , :value => "" %>
+        </div>
+      </div>
+      <div class="row collapse" style="margin-top: 20px;"> 
+        <div class="large-12 columns">
+          <%= text_area_tag :message, nil, :id => "", :class => "contact-area full-width fs20 lh150", :placeholder => "Message" , :value => "" , rows: 6 %>
+        </div>
+      </div>
+      <button style="margin-top: 20px;"  type="submit" class="round button">Send</button>
+    </form>
+        
+  </div>
+  
+
+</div>

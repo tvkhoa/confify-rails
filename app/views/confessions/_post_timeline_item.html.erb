@@ -1,0 +1,39 @@
+<li class="timeline-item radius-5">
+
+  <div class="content-inner">
+    <div class="row">
+      <div class="columns">
+        <% if user_signed_in? %> 
+          <%= render "partials/posts/post_love_button" %>
+        <% end %>
+      </div>
+      <div class="columns item-content p-0">
+        <div class="row collapse">
+          <a href="<%= post_path(@post_decorator.id) %>">
+            <div class="large-11 columns p-0 item-text">
+              <span class="label round alert"><%= @post_decorator.index %></span>
+              <p class="lh150 question">
+                <%= @post_decorator.text.gsub("\n" , "<br/>").try(:html_safe) %>
+              </p>
+              
+              <% if @post_decorator.answer.present? %>
+                <p class="lh150 answer">
+                  <span class="orange-text admin-answer">Feedback:<br/></span>
+                  <%= @post_decorator.answer.gsub("\n" , "<br/>").try(:html_safe) %>
+                </p>
+              <% end %>
+              <hr>
+            </div>
+          </a>
+        </div>
+
+        <div class="row collapse">
+          <div class="large-11 columns p-0 post-info">
+            <%= render "partials/posts/post_info" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</li>

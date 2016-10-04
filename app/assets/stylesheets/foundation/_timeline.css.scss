@@ -1,0 +1,21 @@
+
+.timeline-item{
+  background-color: #{$timeline-item-bg-color};
+  box-shadow: 0px 0px 0px 2px #{$gray-color};
+  margin-bottom: 20px;
+  border-left: 40px solid #{$timeline-item-border-color};
+}
+
+.item-content{
+  position: relative;
+  left: 40px;
+}
+
+.post-info{
+  margin-top: rem-calc(14);
+  margin-bottom: rem-calc(14);
+}
+
+.rating-section{
+  margin-top: 5px;
+}

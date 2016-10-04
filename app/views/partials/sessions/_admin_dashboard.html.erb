@@ -1,0 +1,33 @@
+<header class="clearfix radius-5 header antialiased">
+  <div class="clearfix row ">
+    <div class="large-6 columns">
+      <div class="h3">
+            <h3>Welcome</h3>
+            <img src="<%= current_user.avatar || current_user.image_url %>" />
+            <span><%= current_user.name %></span>  
+      </div>
+    </div>
+    <div class="large-6 columns text-center">
+      <h3 class="black-text">Dashboard</h3>
+      <div class="row">
+        <div class="large-4 columns left text-center">
+          <i class="fa fa-star dashboard-icon"></i>
+          <p class="dashboard-icon-val light-gray-color uppercase">Star</p>
+        </div>
+        <div class="large-4 columns left text-center">
+          <a class="admin-action-button" href="<%= contact_path %>">
+            <i class="fa fa-bell-o dashboard-icon"></i>
+            <p class="dashboard-icon-val light-gray-color uppercase">Contact</p>
+          </a>
+        </div>
+        <div class="large-4 columns left text-center">
+          <a class="admin-action-button" data-method="delete" href="/users/sign_out" rel="nofollow">
+            <i class="fa fa-sign-out dashboard-icon"></i>
+            <p class="dashboard-icon-val light-gray-color uppercase">Logout</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+

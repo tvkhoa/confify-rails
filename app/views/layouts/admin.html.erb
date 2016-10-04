@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Confify Admin" %></title>
+
+    <%= stylesheet_link_tag  "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body data-no-turbolink>
+    
+    <div class="off-canvas-wrap">
+      <div class="inner-wrap">
+        <%= render partial: 'partials/sessions/top_bar' %>
+        
+        <div class="row collapse full-width wrapper">
+          <div class="large-12 columns">
+            <section class="main-section">
+              <!-- content goes here -->
+              <%= yield %>
+            </section>
+          </div>
+        </div>
+
+        <a class="exit-off-canvas"></a>
+
+      </div>
+    </div>
+    
+    <%= javascript_include_tag "application" %>
+    
+  </body>
+</html>

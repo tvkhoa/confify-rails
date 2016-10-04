@@ -1,0 +1,25 @@
+
+<div class="row collapse">
+  <session class="large-8 columns rating-section">
+    <i class="fa fa-clock-o"></i>
+    <span class="icon-val light-gray-color"><%= @post_decorator.watch %></span>
+
+    <i class="fa fa-eye"></i>
+    <span class="icon-val light-gray-color"><%= @post_decorator.watch %></span>
+
+    <i class="fa fa-comment-o"></i>
+    <span class="icon-val light-gray-color"><fb:comments-count href="<%= post_url(@post_decorator.id) %>"</fb:comments-count> <%= @post_decorator.total_comments %></span>
+
+    <i class="fa fa-heart-o"></i>
+    <span class="icon-val light-gray-color"><%= @post_decorator.total_love_users %></span>
+  </session>
+
+  <session class="large-4 columns sharing-section">
+    <div class="right">
+      <div class="fb-like" data-href="<%= post_url(@post_decorator.id) %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+      <div class="custom-tweet-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= post_url(@post_decorator.id) %>" data-via="your_screen_name" data-lang="en">Tweet</a>
+      </div>
+    </div>
+  </session>
+</div>

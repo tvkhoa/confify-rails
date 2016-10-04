@@ -1,0 +1,9 @@
+(function (){
+  var love_button = $("#<%= @post_decorator.love_submit_id %>");
+  love_button.removeClass('disable');
+  <% if @post_decorator.is_loved %>
+    love_button.addClass('love-active');
+  <% else %>
+    love_button.removeClass('love-active');
+  <% end %>
+})();

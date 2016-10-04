@@ -1,0 +1,82 @@
+
+.dashboard-icon{
+  font-size: rem-calc(38);
+  padding-right: rem-calc(0);
+  vertical-align: middle;
+}
+.dashboard-icon-val{
+  font-size: rem-calc(18);
+}
+
+.action-icon{
+  font-size: rem-calc(18);
+  padding-right: rem-calc(2);
+  vertical-align: middle;
+}
+.action-icon-val{
+  font-size: rem-calc(14);
+  position: relative;
+  top: 1px;
+}
+
+
+.rating-section{
+  i{
+    font-size: rem-calc(20);
+    padding-right: rem-calc(0);
+    vertical-align: middle;
+  }
+  .icon-val{
+    padding-right: 15px;
+    font-size: 13px;
+  }
+  .fa-clock-o{
+    color: #{$thick-blue-color};
+  }
+  .fa-eye{
+    color: #b8de92;
+  }
+  .fa-comment-o{
+    color: #{$thick-blue-color};
+  }
+  .fa-heart-o{
+    color: #d9cdf5;
+  }
+}
+
+
+.love-button-wrap{
+  top: 12px;
+  left: -40px;
+}
+.love-bg{
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 0 0 2px #{$gray-color};
+  background-color: #{$love-normal-color};
+  @include rotate(45deg);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.heart-ico{
+  font-size: 30px;
+  background-color: transparent;
+  color: #{$love-active-color};
+  transition: background 0.2s, color 0.2s;
+  top: 10px;
+  left: 10px;
+}
+
+
+.love-active{
+  .love-bg{
+    background-color: #{$love-active-color};
+    box-shadow: 0 0 0 2px #{$love-active-color};
+  }
+
+  .heart-ico{
+    background-color: #{$love-active-color};
+    color: #fff;  
+  }
+
+}

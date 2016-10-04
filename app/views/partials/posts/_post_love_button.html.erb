@@ -1,0 +1,11 @@
+<%= form_tag( post_toggle_love_path(@post_decorator.id) , method: :put, :remote => true, :id => @post_decorator.love_form_id ) do %>
+  <a name="commit" type="submit" class="relative <%= @post_decorator.love_classes(current_user._id) %>" value="" id="<%= @post_decorator.love_submit_id %>" >
+    <div class="relative love-button-wrap remove-select">
+      <div class="love-bg absolute radius-10">
+      </div>
+      <div class="absolute">
+        <i class="relative heart-ico fa fa-heart-o p-0"></i>
+      </div>
+    </div>
+  </a>
+<% end %>

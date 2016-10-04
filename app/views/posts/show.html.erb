@@ -1,0 +1,60 @@
+<div class="row mt-20">
+  <a class="button radius blue-button" href="<%= get_confess_path(@post_decorator.confession_pathname)  %>">
+    <i class="fa fa-mail-reply action-icon"></i>
+    Back To Page
+  </a>
+</div>
+
+
+
+<div class="row collapse">
+  <div class="large-12 columns timeline-item timeline-item radius-5">
+
+  <div class="content-inner">
+    <div class="row">
+      <div class="columns">
+        <% if user_signed_in? %> 
+          <%= render "partials/posts/post_love_button" %>
+        <% end %>
+      </div>
+      <div class="columns item-content p-0">
+        <div class="row collapse">
+          <a href="<%= post_path(@post_decorator.id) %>">
+            <div class="large-11 columns p-0 item-text">
+              <span class="label round alert"><%= @post_decorator.index %></span>
+              <p class="lh150 question">
+                <%= @post_decorator.text.gsub("\n" , "<br/>").try(:html_safe) %>
+              </p>
+              
+              <% if @post_decorator.answer.present? %>
+                <p class="lh150 answer">
+                  <span class="orange-text admin-answer">Feedback:<br/></span>
+                  <%= @post_decorator.answer.gsub("\n" , "<br/>").try(:html_safe) %>
+                </p>
+              <% end %>
+              <hr>
+            </div>
+          </a>
+        </div>
+
+        <div class="row collapse">
+          <div class="large-11 columns p-0 post-info">
+            <%= render "partials/posts/post_info" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div class="row">
+ <session class="responses-section">
+      <div class="clearfix">
+        <p class="right">Give a response</p>
+      </div>
+      <div class="clearfix">
+        <%= render "facebook_comment" %>
+      </div>
+    </session>
+</div>

@@ -1,0 +1,53 @@
+<%= render "partials/sessions/admin_dashboard" %> 
+<div class="row mt-20">
+  <section class="panel radius border-blue">
+    <div>
+      <i class="fa fa-th"></i>
+      <span class="dashboard-icon-val">Your pages</span>
+    </div>
+    <table class="admin_table">
+      <thead>
+        <th>Title</th>
+        <th>Text</th>
+        <th>Path</th>
+        <th>Action</th>
+      </thead>
+
+      <% @confessions.each do |confession| %>
+      <tr>
+        <td><%= confession.title %></td>
+        <td><%= confession.text %></td>
+        <td><%= confession.path_name %></td>
+        <td>
+          <a class="button radius tiny success admin-button" href="admin/<%= confession.path_name %>">
+            <i class="fa fa-cogs action-icon"></i>
+            <span class="action-icon-val">Manage</span>
+          </a>
+          
+          <a class="button radius tiny primary admin-button" href="/<%= confession.path_name %>">
+            <i class="fa fa-arrow-circle-o-up action-icon"></i>
+            <span class="action-icon-val">Show</span>
+          </a>
+          
+          <a class="button radius tiny blue-button admin-button" href="<%= edit_admin_confession_path(confession) %>">
+            <i class="fa fa-pencil-square-o action-icon"></i>
+            <span class="action-icon-val">Edit</span>
+          </a>
+
+
+          <a class="button radius tiny alert admin-button" data-confirm="Are you sure?" data-method="delete" href="<%= admin_confession_path(confession) %>" rel="nofollow">
+            <i class="fa fa-trash-o action-icon"></i>
+            <span class="action-icon-val">Destroy</span>
+          </a>
+
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+    <a class="button radius success" href="new_admin_confession_path">
+      <i class="fa fa-plus action-icon"></i>
+      New Page
+    </a>
+  </section>
+</div>

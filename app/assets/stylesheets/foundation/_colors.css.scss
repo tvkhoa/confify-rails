@@ -1,0 +1,53 @@
+.blue-text{
+  color: #{$blue-text-color};
+}
+
+.blue-button{
+  background-color: #55c1e7 !important;
+  border-color: #cf280e !important;
+  color: #fff !important;
+}
+.blue-button:hover, .blue-button:active{
+  background-color: scale-color(#55c1e7, $lightness: -20%) !important;
+}
+
+
+.black-text{
+  color: #303030;
+}
+.gray-text{
+  color: #808080;
+}
+.orange-text{
+	color: #efaea2 !important;
+}
+.white-text{
+	color: #fff !important;
+}
+
+
+
+.green{
+	color: #389B00 !important;
+}
+
+
+
+
+.white-bg{
+	background-color: #fff;
+}
+.transparent-bg{
+	background-color: transparent;
+}
+
+.white{
+	color: #fff !important;
+}
+.light-blue{
+	color: #556979;
+}
+
+
+
+

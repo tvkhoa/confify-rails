@@ -1,0 +1,22 @@
+$rem-base: 20px;
+$base-line-height: 150%;
+
+@import "foundation/functions";
+
+
+$body-bg: #fff;
+$body-font-color: #222;
+$body-font-family: "ConfifyOps","Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-weight: normal;
+$body-font-style: normal;
+
+
+
+@mixin rotate($degrees) {
+   -moz-transform: rotate($degrees);  
+     -o-transform: rotate($degrees);  
+-webkit-transform: rotate($degrees);
+           filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+       -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)}, SizingMethod='auto expand')";       
+             zoom: 1;
+}

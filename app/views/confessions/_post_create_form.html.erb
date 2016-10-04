@@ -1,0 +1,14 @@
+
+  <div class="large-6 columns compose-div" >
+    <%= form_for @confession, :url => confession_add_post_path(@confession) do |f| %>
+      <div class="clearfix">
+        <%= f.text_area :text, :id => "confession_post_text", :class => "post-area full-width", :placeholder => "Compose your post" , :value => "" %>
+      </div>
+      <div class="clearfix ask-panel radius"> 
+        <button type="submit" class="small radius radius right ask-button m-0">
+          <i class="fa fa-pencil action-icon"></i>
+          Confess
+        </button>
+      </div>
+    <% end %>
+  </div>

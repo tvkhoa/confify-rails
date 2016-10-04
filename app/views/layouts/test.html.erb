@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Confify Admin" %></title>
+
+    <%= stylesheet_link_tag  "application" %>
+    <%= csrf_meta_tags %>
+
+    
+  </head>
+
+  <body onLoad="init();" data-no-turbolink>
+    <div class="off-canvas-wrap">
+      <div class="inner-wrap">
+       <%= render partial: 'partials/sessions/top_bar' %>
+        
+        <div class="row full-width wrapper">
+            <section class="main-section">
+              <!-- content goes here -->
+              <%= yield %>
+            </section>
+        </div>
+
+
+      </div>
+    </div>
+    
+    <%= javascript_include_tag "application" %>
+
+    <script>
+      var imageUrls = {
+        pigSprite : "<%= asset_path 'pig1.png'%>",
+        foreground : "<%= asset_path 'foreground.png'%>",
+        background0 : "<%= asset_path 'background.jpg'%>",
+        background1 : "<%= asset_path 'far_big_rock.png'%>",
+        background2 : "<%= asset_path 'far_rock.png'%>",
+        gameTitle : "<%= asset_path 'game_name.png'%>"
+      }
+
+      var global_vals = {
+        foreground_w : 512,
+        delta_foreground : 80,
+        pigY : 625
+      }
+    </script>
+    <%= javascript_include_tag "pig","ContentManager" %>
+
+    <script>
+      var canvas;
+      var stage;
+      var screen_width;
+      var screen_height;
+      var pig_instance;
+
+      function init() {
+        //find canvas and load images, wait for last image to load
+        canvas = document.getElementById("testCanvas");
+
+        // create a new stage and point it at our canvas:
+        stage = new createjs.Stage(canvas);
+        stage.canvas.height = 600;
+        stage.y = -168;
+        // grab canvas width and height for later calculations:
+        screen_width = canvas.width;
+        screen_height = canvas.height;
+
+        contentManager = new ContentManager();
+        contentManager.SetDownloadCompleted(startGame);
+        contentManager.StartDownload();
+
+
+        
+
+
+      }
+
+      function startGame() {
+        // Random number to set the Y position
+        // of our Pig & Enemies
+        var pigY = 100;
+        
+        //CreateAndAddRandomBackground();
+
+        // Our Pig can be moved with the arrow keys (left, right)
+        //document.onkeydown = handleKeyDown;
+        //document.onkeyup = handleKeyUp;
+
+        // Creating the Pig
+        pig_instance = new Pig(contentManager.imgPig);
+        pig_instance.x = 400;
+        pig_instance.y = global_vals.pigY;
+
+        setBackgroundsLayer();
+        setTileForeground();
+        setTitleOfGame();
+
+        stage.addChild(pig_instance);
+            
+        createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+        createjs.Ticker.setFPS(30);
+        createjs.Ticker.addEventListener("tick", tick);
+      }
+
+      function setTitleOfGame(){
+        titleOfGame = new createjs.Bitmap(contentManager.imgGameTitle);
+        titleOfGame.regX = 512;
+        titleOfGame.regY = 168;
+        titleOfGame.y = 350;
+        titleOfGame.x = 512;
+        titleOfGame.scaleX = 0;
+        titleOfGame.scaleY = 0;
+        stage.addChild(titleOfGame);
+      }
+
+      function setBackgroundsLayer(){
+        backgroundSeqTile1 = new createjs.Bitmap(contentManager.imgBackgroundLayers[0]);
+        backgroundSeqTile2 = new createjs.Bitmap(contentManager.imgBackgroundLayers[1]);
+        backgroundSeqTile2.y = 365;
+        backgroundSeqTile3 = new createjs.Bitmap(contentManager.imgBackgroundLayers[2]);
+        backgroundSeqTile3.y = 420;
+
+        stage.addChild(backgroundSeqTile1);
+        stage.addChild(backgroundSeqTile2);
+        stage.addChild(backgroundSeqTile3);
+      }
+
+      function setTileForeground(){
+        //Tile where the Pig & the ennemies will be able to walk on to
+        bmpSeqTile = new createjs.Bitmap(contentManager.imgTile);
+        bmpSeqTile.regX = bmpSeqTile.frameWidth / 2 | 0;
+        bmpSeqTile.regY = bmpSeqTile.frameHeight / 2 | 0;
+
+        // Taking the same tile all over the width of the game
+        for (var i = 0; i < 2; i++) {
+            // clone the original tile, so we don't need to set shared properties:
+            var bmpSeqTileCloned = bmpSeqTile.clone();
+
+            // set display properties:
+            bmpSeqTileCloned.x = 0 + (i * global_vals.foreground_w);
+            bmpSeqTileCloned.y = global_vals.pigY + global_vals.delta_foreground;
+
+            // add to the display list:
+            stage.addChild(bmpSeqTileCloned);
+        }
+      }
+
+      function tick() {
+        if (titleOfGame.scaleX < 1){
+          titleOfGame.scaleX = titleOfGame.scaleX + 0.05;
+        }
+        if (titleOfGame.scaleY < 1){
+          titleOfGame.scaleY = titleOfGame.scaleY + 0.05;
+        }
+          
+
+        // Update logic of the Pig
+        pig_instance.tick();
+
+        // update the stage:
+        stage.update();
+      }
+
+    </script>
+    <script>
+        // function init() {
+        //     var stage = new createjs.Stage("demoCanvas");
+        //     var circle = new createjs.Shape();
+        //     circle.graphics.beginFill("red").drawCircle(0, 0, 50);
+        //     circle.x = 100;
+        //     circle.y = 100;
+        //     stage.addChild(circle);
+
+        //     // ticker
+        //     createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+        //     createjs.Ticker.setFPS(30);
+        //     createjs.Ticker.addEventListener("tick", tick);
+        //     function tick(event) { 
+        //         // move 100 pixels per second (elapsedTimeInMS / 1000msPerSecond * pixelsPerSecond):
+        //         circle.x += event.delta/1000*100;
+        //         // this will log a steadily increasing value:
+        //         // console.log("total time: "+createjs.Ticker.getTime());
+        //     }
+        //     //
+
+        // }
+
+        // (function() {
+ 
+        //   var Button = function(label) {
+        //     this.initialize(label);
+        //   }
+        //   var p = Button.prototype = new createjs.Container();
+           
+        //   Button.prototype.Container_initialize = p.initialize;
+        //   Button.prototype.initialize = function(label) {
+        //       this.Container_initialize();
+        //       // add custom setup logic here.
+        //   }
+           
+        //   window.Button = Button;
+        // }());
+
+  </script>
+  <script>
+    // var canvas;
+    // var stage;
+    // var screen_width;
+    // var screen_height;
+    // var bmpAnimation;
+
+    // var imgMonsterARun = new Image();
+
+    // function init() {
+    //     canvas = document.getElementById("testCanvas");
+
+    //     imgMonsterARun.onload = handleImageLoad;
+    //     imgMonsterARun.onerror = handleImageError;
+    //     imgMonsterARun.src = "<%= asset_path 'test.png'%>";
+    // }
+
+    // function reset() {
+    //     stage.removeAllChildren();
+    //     createjs.Ticker.removeAllListeners();
+    //     stage.update();
+    // }
+
+    // function handleImageLoad(e) {
+    //     startGame();
+    // }
+
+    // function startGame() {
+    //   // create a new stage and point it at our canvas:
+    //   stage = new createjs.Stage(canvas);
+      
+    //   // grab canvas width and height for later calculations:
+    //   screen_width = canvas.width;
+    //   screen_height = canvas.height;
+      
+    //     // create spritesheet and assign the associated data.
+    //     var spriteSheet = new createjs.SpriteSheet({
+    //       // image to use
+    //       images: [imgMonsterARun], 
+    //       // width, height & registration point of each sprite
+    //       frames: {width: 234, height: 150, regX: 0, regY: 0}, 
+    //       animations: { 
+    //         walk: [0, 5, "walk", 0.5]
+    //       }
+    //     });
+        
+    //     // to save file size, the loaded sprite sheet only includes left facing animations
+    //     // we could flip the display objects with scaleX=-1, but this is expensive in most browsers
+    //     // instead, we generate a new sprite sheet which includes the flipped animations
+
+    //     createjs.SpriteSheetUtils.addFlippedFrames(spriteSheet, true, false, false);
+
+       
+
+    //     // create a BitmapAnimation instance to display and play back the sprite sheet:
+    //     bmpAnimation = new createjs.BitmapAnimation(spriteSheet);
+
+    //     bmpAnimation.regX = bmpAnimation.spriteSheet.frameWidth / 2 | 0;
+    //     bmpAnimation.regY = bmpAnimation.spriteSheet.frameHeight / 2 | 0;
+
+    //     bmpAnimation.gotoAndPlay("walk_h");   //walking from left to right
+
+    //     bmpAnimation.name = "pig";
+    //     bmpAnimation.direction = 90;
+    //     bmpAnimation.vX = 8;
+    //     bmpAnimation.x = 234;
+    //     bmpAnimation.y = 0;
+        
+    //     // have each monster start at a specific frame
+    //     bmpAnimation.currentFrame = 5;
+    //     stage.addChild(bmpAnimation);
+        
+    //     // we want to do some work before we update the canvas,
+    //     // otherwise we could use Ticker.addListener(stage);
+    //     createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+    //     createjs.Ticker.setFPS(30);
+    //     createjs.Ticker.addEventListener("tick", tick);
+    // }
+
+    // //called if there is an error loading the image (usually due to a 404)
+    // function handleImageError(e) {
+    //   console.log("Error Loading Image : " + e.target.src);
+    // }
+
+    // function tick() {
+    //     // Hit testing the screen width, otherwise our sprite would disappear
+    //     if (bmpAnimation.x >= screen_width - 234) {
+    //         // We've reached the right side of our screen
+    //         // We need to walk left now to go back to our initial position
+    //         bmpAnimation.direction = -90;
+    //         bmpAnimation.x = screen_width - 234 - 234;
+    //         bmpAnimation.gotoAndPlay("walk")
+    //     }
+
+    //     if (bmpAnimation.x < 0) {
+    //         // We've reached the left side of our screen
+    //         // We need to walk right now
+    //         bmpAnimation.direction = 90;
+    //         bmpAnimation.x = 234 ;
+    //         bmpAnimation.gotoAndPlay("walk_h");
+    //     }
+
+    //     // Moving the sprite based on the direction & the speed
+    //     if (bmpAnimation.direction == 90) {
+    //         bmpAnimation.x += bmpAnimation.vX;
+    //     }
+    //     else {
+    //         bmpAnimation.x -= bmpAnimation.vX;
+    //     }
+
+    //     // update the stage:
+    //     stage.update();
+
+    // }
+
+  </script>
+
+
+  </body>
+</html>

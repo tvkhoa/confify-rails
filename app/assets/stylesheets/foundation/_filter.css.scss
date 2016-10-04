@@ -1,0 +1,29 @@
+
+.filter-wrap{
+  background-color: #{$filter-bg-color};
+  padding: rem-calc(15 0);
+  border-top: 2px dotted #{$gray-color};
+  border-bottom: 2px dotted #{$gray-color};
+}
+
+.search-wrap{
+  border: 1px solid #{$gray-color};
+  display: inline-block;
+  background-color: #fff;
+}
+
+.search-input{
+  border: none;
+  outline: none;
+  font-size: rem-calc(16);
+  padding-right: 10px;
+  line-height: 150%;
+  border-radius: 10px;
+}
+
+.button-submit{
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 0;
+  color: #{$gray-color};
+}

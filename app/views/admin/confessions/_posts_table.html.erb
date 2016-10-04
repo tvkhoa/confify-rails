@@ -1,0 +1,83 @@
+<div class="row">
+    <section class="panel radius white-bg callout-border">
+        <div>
+            <i class="fa fa-th"></i>
+            <span class="dashboard-icon-val">Your posts</span>
+        </div>
+
+
+        <table class="admin_table"> 
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Post</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% posts_table.each_with_index do |post, index| %>
+                <tr>
+                
+                    <td><%= post.index %></td>
+                    <td>
+                        <p class="question"><%= post.text.gsub("\n" , "<br/>").try(:html_safe) %></p>
+                        <hr/>
+                        <h4 class="feedback-text green"><strong>Admin's feedback:</strong></h4>
+
+                        <div class="clearfix" id="answer-div-<%= post._id %>">
+                            <% if post.answer.present? %>
+                                <div class="answer">
+                                    <p class="m0"><%= post.answer.gsub("\n" , "<br/>").try(:html_safe) %></p>
+                                </div>
+                            <% else %>
+                                <a class="feedback-btn button radius tiny success " data-id="<%= post._id %>">
+                                    <i class="fa fa-trash-o action-icon"></i>
+                                    <span class="action-icon-val">
+                                        <%= post.answer.present? ? "Edit feedback" : "Add feedback" %>
+                                    </span>
+                                </a>
+                            <% end %>
+                         </div>
+                        <div class="clearfix feedback-form hide" id="feedback-form-<%= post._id %>" >
+
+                            <%= form_tag( admin_confession_post_update_answer_path(:confession_id => post.confession._id  ,:post_id => post._id) , method: :put, :remote => true, :html => {:class => "clearfix"} ) do %>
+                                <%= text_area_tag "answer", nil, :class => "answer" %>
+                                <%= submit_tag "Submit", :class => "button mbt10 radius success right" %>
+                               
+                                <a class="feedback-cancel-btn button mbt10 mr10 radius success right" data-id="<%= post._id %>" >Cancel</a>
+                                
+                            <% end %>
+                        </div>
+                   
+                    </td>
+                    <td class="no-select">
+                        <%= form_tag( admin_confession_post_update_approve_path(:confession_id => post.confession._id  ,:post_id => post._id) , method: :put, :remote => true ) do %>
+                            <div class="switch round small switch-button">
+                                <input id="switchName<%= index %>" type="checkbox" name="is_previous_approve" value="yes"<% if post.approved? %> checked <% end %> >
+                                <label for="switchName<%= index %>" ></label>
+                            </div>
+                        <% end %>
+                    </td>
+                    
+                    <td>
+                        <a class="feedback-btn button radius tiny success" data-id="<%= post._id %>">
+                            <i class="fa fa-trash-o action-icon"></i>
+                            <span class="action-icon-val">
+                                <%= post.answer.present? ? "Edit feedback" : "Add feedback" %>
+                            </span>
+                        </a>
+
+                        <a class="button radius tiny alert admin-button" data-method="delete" href="<%= admin_confession_post_path(:confession_id => post.confession._id  ,:id => post._id) %>" rel="nofollow">
+                            <i class="fa fa-trash-o action-icon"></i>
+                            <span class="action-icon-val"></span>
+                        </a>
+
+                        
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </section>
+</div>

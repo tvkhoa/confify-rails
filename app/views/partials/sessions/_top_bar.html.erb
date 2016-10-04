@@ -1,0 +1,56 @@
+
+  <nav class="top-bar" data-topbar>
+    <div class="row">
+      <ul class="title-area">
+          <li class="name">
+            <a href="#" class="logo">
+              <img src="<%= asset_path 'splash.png' %>" ></img>
+            </a>
+          </li>
+           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <div class=" top-bar-section">
+        
+        <!-- Right Nav Section -->
+        <ul class="right">
+          
+          <% if current_user %>
+
+          <li class="has-dropdown">
+            <a href="#" class="p-0">
+              <img src="<%= current_user.avatar || current_user.image_url %>" />
+              <span><%= current_user.name %></span>
+            </a>
+            <ul class="dropdown">
+
+              <li class="topbar-dropdown-wrap">
+                  <a class="topbar-dropdown-item" href="<%= admin_root_path %>" class="right alert radius round">
+                    <i class="fa fa-th-large action-icon"></i>
+                    Admin
+                  </a>
+              </li>
+
+              <li class="topbar-dropdown-wrap">
+                  <a data-method="delete" class="topbar-dropdown-item" href="/users/sign_out" rel="nofollow" class="right alert radius round">
+                    <i class="fa fa-sign-out action-icon"></i>
+                    Log out
+                  </a>
+              </li>
+
+            </ul>
+          </li>
+          <% else %>
+          <li>
+            <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %>
+              <% end -%>
+            <% end -%>
+          </li>
+          <% end %>
+        </ul>    
+      </div>
+    </div>
+  </nav>

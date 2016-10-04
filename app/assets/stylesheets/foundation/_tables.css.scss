@@ -1,0 +1,38 @@
+$include-html-table-classes: $include-html-classes !default;
+
+// These control the background color for the table and even rows
+$table-bg: #eef9fd;
+$table-even-row-bg: #E4EDFF;
+
+// These control the table cell border style
+$table-border-style: solid;
+$table-border-size: 1px;
+$table-border-color: #ddd;
+
+// These control the table head styles
+$table-head-bg: #fff;
+$table-head-font-size: rem-calc(16);
+$table-head-font-color: #222;
+$table-head-font-weight: bold;
+$table-head-padding: rem-calc(10 10 10 10);
+
+// These control the row padding and font styles
+$table-row-padding: rem-calc(30 5);
+$table-row-font-size: rem-calc(16);
+$table-row-font-color: #222;
+$table-line-height: rem-calc(18);
+
+// These are for controlling the display and margin of tables
+$table-display: table-cell;
+$table-margin-bottom: rem-calc(20);
+
+@import "foundation/components/tables";
+
+.admin_table{
+  width: 100%;
+  margin-top: 12px;
+}
+
+.admin-button{
+  margin-bottom: 0px;
+}

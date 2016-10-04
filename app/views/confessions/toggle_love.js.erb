@@ -1,0 +1,9 @@
+(function (){
+  var love_button = $("#<%= @confession_id %>_confession_love_submit");
+  love_button.removeClass('disable');
+  <% if @is_loved %>
+    love_button.addClass('love-active');
+  <% else %>
+    love_button.removeClass('love-active');
+  <% end %>
+})();

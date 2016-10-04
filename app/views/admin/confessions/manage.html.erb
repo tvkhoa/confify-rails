@@ -1,0 +1,58 @@
+<header class="clearfix radius-5 header antialiased">
+  <div class="clearfix row ">
+    <div class="large-6 columns">
+      <div>
+        <h3><strong><%= @confession.title %></strong></h3>
+        <p><%= @confession.text %></p>
+      </div>
+    </div>
+    <div class="large-6 columns text-center">
+      <h3 class="black-text">Actions</h3>
+      <div class="row">
+        <div class="large-4 columns left text-center">
+          <a class="admin-action-button" href="/<%= @confession.path_name %>">
+            <i class="fa  fa-external-link dashboard-icon"></i>
+            <p class="dashboard-icon-val uppercase">Show</p>
+          </a>
+        </div>
+        <div class="large-4 columns left text-center">
+          <a class="admin-action-button" href="<%= edit_admin_confession_path(@confession) %>">
+            <i class="fa fa-cog dashboard-icon"></i>
+            <p class="dashboard-icon-val  uppercase">Edit</p>
+          </a>
+        </div>
+        <div class="large-4 columns left text-center">
+          <a class="admin-action-button" href="<%= admin_root_path %>">
+            <i class="fa fa-mail-reply dashboard-icon"></i>
+            <p class="dashboard-icon-val uppercase">Back To Admin</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="row admin-page">
+
+  <dl class="tabs" data-tab>
+    <dd class="active"><a href="#panel2-1">All</a></dd>
+    <dd><a href="#panel2-2">Approved</a></dd>
+    <dd><a href="#panel2-3">Not-Approved</a></dd>
+  </dl>
+
+
+  <div class="tabs-content">
+    <div class="content active" id="panel2-1">
+      <%= render partial:"posts_table", object: @posts %>
+    </div>
+    <div class="content" id="panel2-2">
+      <%= render partial:"posts_table", object: @approved_posts %>
+    </div>
+    <div class="content" id="panel2-3">
+      <%= render partial:"posts_table", object: @not_approved_posts %>
+    </div>
+  </div>
+
+  <%= link_to 'Back', admin_root_path , :class => "button" %>
+
+</div>
