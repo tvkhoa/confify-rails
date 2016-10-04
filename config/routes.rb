@@ -40,12 +40,5 @@ Choose::Application.routes.draw do
 
   get "contact" => "contact#index"
   
-  # test
-  get "/test/test" => "test#index"  
-
-  post "test_post" => "test#test_post"
-
-  get "store" =>  "test#store"
-  
 
 end
